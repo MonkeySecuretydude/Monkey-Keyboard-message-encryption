@@ -100,13 +100,6 @@ def toggle():
 toggle_btn.config(command=toggle)
 toggle()
 
-# Button for updating from GitHub
-
-
-
-# Mini console with progress bar
-progress_var = IntVar()
-progress_bar = ttk.Progressbar(root, variable=progress_var, mode='indeterminate')
 progress_bar.pack()
 
 root.mainloop()
