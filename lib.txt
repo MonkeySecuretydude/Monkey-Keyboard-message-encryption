@@ -1,0 +1,14 @@
+numpy
+matplotlib
+requests
+beautifulsoup4
+pandas
+scipy
+scikit-learn
+tensorflow
+torch
+django
+flask
+sqlalchemy
+pytest
+
