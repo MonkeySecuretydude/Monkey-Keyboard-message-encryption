@@ -1,7 +1,8 @@
 import os
 import string
 import random
-from tkinter import Tk, Button, Checkbutton, IntVar, Label, Entry, filedialog, messagebox, PhotoImage
+import subprocess
+from tkinter import Tk, Button, Checkbutton, IntVar, Label, Entry, filedialog, messagebox, PhotoImage, ttk
 from pathlib import Path
 import pyperclip
 
@@ -58,8 +59,33 @@ def decode():
     else:
         messagebox.showerror("Error", "File does not exist.")
 
+def update_from_github():
+    github_repo_url = "https://github.com/MonkeySecuretydude/Monkey-Keyboard-message-encryption/blob/main/Decodev1.py"
+    try:
+        result = subprocess.run(["git", "pull", github_repo_url], capture_output=True, text=True, check=True)
+
+        # Check if there are changes
+        if "Already up to date" in result.stdout:
+            messagebox.showinfo("No Update", "No updates available.")
+        else:
+            messagebox.showinfo("Update", "Update successful. Restart the application.")
+            show_update_window()
+
+    except subprocess.CalledProcessError as e:
+        messagebox.showerror("Update Error", f"Error updating from GitHub: {e.stderr}")
+
+def show_update_window():
+    update_window = Tk()
+    update_window.title("New Version Available")
+    update_window.geometry("300x100")
+
+    Label(update_window, text="A new version is available.").pack(pady=10)
+    Button(update_window, text="OK", command=update_window.destroy).pack(pady=10)
+
+    update_window.mainloop()
+
 root = Tk()
-root.title("Monkey keboard encoder/decoder v1")
+root.title("Monkey keyboard encoder/decoder v1")
 root.geometry("400x300")
 
 # Set window icon for the taskbar
@@ -98,4 +124,14 @@ def toggle():
 
 toggle_btn.config(command=toggle)
 toggle()
+
+# Button for updating from GitHub
+update_btn = Button(root, text="Update from GitHub", command=update_from_github, bg='yellow')
+update_btn.pack()
+
+# Mini console with progress bar
+progress_var = IntVar()
+progress_bar = ttk.Progressbar(root, variable=progress_var, mode='indeterminate')
+progress_bar.pack()
+
 root.mainloop()
