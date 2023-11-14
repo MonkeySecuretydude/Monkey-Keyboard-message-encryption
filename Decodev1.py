@@ -101,8 +101,8 @@ toggle_btn.config(command=toggle)
 toggle()
 
 # Button for updating from GitHub
-update_btn = Button(root, text="Update from GitHub", command=update_from_github, bg='yellow')
-update_btn.pack()
+
+
 
 # Mini console with progress bar
 progress_var = IntVar()
