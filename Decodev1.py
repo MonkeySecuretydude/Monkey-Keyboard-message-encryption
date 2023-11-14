@@ -100,6 +100,6 @@ def toggle():
 toggle_btn.config(command=toggle)
 toggle()
 
-progress_bar.pack()
+
 
 root.mainloop()
